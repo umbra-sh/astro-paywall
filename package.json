@@ -1,0 +1,34 @@
+{
+  "name": "astro-paywall",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:host": "npm --prefix host-next run dev",
+    "build": "astro build",
+    "build:host": "npm --prefix host-next run build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "test": "tsx --test tests/**/*.test.ts",
+    "verify": "npm run typecheck && npm run test && npm run build",
+    "verify:host": "npm --prefix host-next run typecheck && npm --prefix host-next run build",
+    "deploy:vercel": "npx vercel --prod --yes",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/vercel": "^9.0.4",
+    "astro": "^5.17.1"
+  },
+  "engines": {
+    "node": "18.20.8 || ^20.3.0 || >=22.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@types/node": "^24.3.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "tailwindcss": "^4.1.18",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
+  }
+}

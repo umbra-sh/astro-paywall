@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-j7pv25f6> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.17.1"><title>astro-paywall — Embeddable Paywall Popups</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/paywall.css"><link rel="stylesheet" href="/_astro/index.BIpNf2h4.css"></head> <body data-astro-cid-j7pv25f6> <div class="landing-shell" data-astro-cid-j7pv25f6> <!-- Navigation --> <nav class="landing-nav" data-astro-cid-j7pv25f6> <a href="/" class="nav-brand" data-astro-cid-j7pv25f6> <span class="brand-dot" data-astro-cid-j7pv25f6></span>
+astro-paywall
+</a> <div class="nav-links" data-astro-cid-j7pv25f6> <a href="#variants" data-astro-cid-j7pv25f6>Variants</a> <a href="#code" data-astro-cid-j7pv25f6>Integration</a> <a href="#features" data-astro-cid-j7pv25f6>Features</a> </div> <button class="nav-cta" onclick="openPaywall('default')" data-astro-cid-j7pv25f6>Try Demo</button> </nav> <!-- Hero --> <section class="hero-section" data-astro-cid-j7pv25f6> <span class="hero-eyebrow" data-astro-cid-j7pv25f6>Iframe-Ready Components</span> <h1 class="hero-title" data-astro-cid-j7pv25f6>Beautiful paywall popups.<br data-astro-cid-j7pv25f6>Zero dependencies.</h1> <p class="hero-subtitle" data-astro-cid-j7pv25f6>
+Drop-in paywall dialogs designed for embedding. Server-rendered with Astro, 
+          styled with glassmorphism, and ready for any framework.
+</p> <div class="hero-actions" data-astro-cid-j7pv25f6> <button class="btn-primary" onclick="openPaywall('default')" data-astro-cid-j7pv25f6> <span data-astro-cid-j7pv25f6>Try Default</span> <span data-astro-cid-j7pv25f6>→</span> </button> <a href="#variants" class="btn-secondary" data-astro-cid-j7pv25f6>Explore Variants</a> </div> </section> <!-- Demo / Variants Section --> <section class="demo-section" id="variants" data-astro-cid-j7pv25f6> <div class="section-header" data-astro-cid-j7pv25f6> <h2 class="section-title" data-astro-cid-j7pv25f6>Paywall Variants</h2> <p class="section-subtitle" data-astro-cid-j7pv25f6>Five battle-tested conversion patterns. One clean route.</p> </div> <div class="variant-grid" data-astro-cid-j7pv25f6> <div class="variant-card" onclick="openPaywall('default')" data-astro-cid-j7pv25f6> <div class="variant-icon" data-astro-cid-j7pv25f6>💎</div> <h3 class="variant-title" data-astro-cid-j7pv25f6>Default</h3> <p class="variant-desc" data-astro-cid-j7pv25f6>Clean upgrade prompt with survey fallback. Best for general paywalls.</p> <button class="variant-btn" data-astro-cid-j7pv25f6>Try it</button> </div> <div class="variant-card" onclick="openPaywall('sitewide')" data-astro-cid-j7pv25f6> <div class="variant-icon" data-astro-cid-j7pv25f6>⏰</div> <h3 class="variant-title" data-astro-cid-j7pv25f6>Campaign</h3> <p class="variant-desc" data-astro-cid-j7pv25f6>Urgency-driven with countdown timer and pricing tiers. For flash sales.</p> <button class="variant-btn" data-astro-cid-j7pv25f6>Try it</button> </div> <div class="variant-card" onclick="openPaywall('free-week')" data-astro-cid-j7pv25f6> <div class="variant-icon" data-astro-cid-j7pv25f6>🎁</div> <h3 class="variant-title" data-astro-cid-j7pv25f6>Free Trial</h3> <p class="variant-desc" data-astro-cid-j7pv25f6>7-day trial offer with feature highlights. Converts trial users.</p> <button class="variant-btn" data-astro-cid-j7pv25f6>Try it</button> </div> <div class="variant-card" onclick="openPaywall('free-group')" data-astro-cid-j7pv25f6> <div class="variant-icon" data-astro-cid-j7pv25f6>👥</div> <h3 class="variant-title" data-astro-cid-j7pv25f6>Team Access</h3> <p class="variant-desc" data-astro-cid-j7pv25f6>Group plan upsell. Perfect for B2B and team invitations.</p> <button class="variant-btn" data-astro-cid-j7pv25f6>Try it</button> </div> </div> </section> <!-- Code Section --> <section class="code-section" id="code" data-astro-cid-j7pv25f6> <div class="section-header" data-astro-cid-j7pv25f6> <h2 class="section-title" data-astro-cid-j7pv25f6>Drop-in Integration</h2> <p class="section-subtitle" data-astro-cid-j7pv25f6>One iframe. Zero dependencies. Works everywhere.</p> </div> <div class="code-block" data-astro-cid-j7pv25f6> <div class="code-header" data-astro-cid-j7pv25f6> <span class="dot dot-red" data-astro-cid-j7pv25f6></span> <span class="dot dot-yellow" data-astro-cid-j7pv25f6></span> <span class="dot dot-green" data-astro-cid-j7pv25f6></span> <span class="code-filename" data-astro-cid-j7pv25f6>embed.html</span> </div> <div class="code-content" data-astro-cid-j7pv25f6> <code class="code-block-text" data-astro-cid-j7pv25f6>Default paywall
+&lt;iframe
+  src="/paywall?variant=default&amp;dismissable=true"
+  style="width: 100%; height: 600px; border: none;"
+&gt;&lt;/iframe&gt;
+
+Close handler
+&lt;script&gt;
+window.addEventListener('message', function(e) {
+  if (e.data === 'closePaywall') {
+    // Hide your modal
+  }
+});
+&lt;/script&gt;</code> </div> </div> </section> <!-- Features Section --> <section class="features-section" id="features" data-astro-cid-j7pv25f6> <div class="section-header" data-astro-cid-j7pv25f6> <h2 class="section-title" data-astro-cid-j7pv25f6>Why astro-paywall?</h2> <p class="section-subtitle" data-astro-cid-j7pv25f6>Production-ready patterns without the baggage.</p> </div> <div class="features-grid" data-astro-cid-j7pv25f6> <div class="feature-card" data-astro-cid-j7pv25f6> <div class="feature-icon" data-astro-cid-j7pv25f6> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-j7pv25f6> <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" data-astro-cid-j7pv25f6></polygon> </svg> </div> <h3 class="feature-title" data-astro-cid-j7pv25f6>Zero Client JS</h3> <p class="feature-description" data-astro-cid-j7pv25f6>Server-rendered HTML. No hydration, no bundle bloat. Just fast, reliable popups.</p> </div> <div class="feature-card" data-astro-cid-j7pv25f6> <div class="feature-icon" data-astro-cid-j7pv25f6> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-j7pv25f6> <rect x="3" y="3" width="18" height="18" rx="2" ry="2" data-astro-cid-j7pv25f6></rect> <line x1="3" y1="9" x2="21" y2="9" data-astro-cid-j7pv25f6></line> <line x1="9" y1="21" x2="9" y2="9" data-astro-cid-j7pv25f6></line> </svg> </div> <h3 class="feature-title" data-astro-cid-j7pv25f6>Framework Agnostic</h3> <p class="feature-description" data-astro-cid-j7pv25f6>React, Vue, Svelte, vanilla JS — iframes work everywhere. No wrapper libraries needed.</p> </div> <div class="feature-card" data-astro-cid-j7pv25f6> <div class="feature-icon" data-astro-cid-j7pv25f6> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-j7pv25f6> <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="feature-title" data-astro-cid-j7pv25f6>Secure by Default</h3> <p class="feature-description" data-astro-cid-j7pv25f6>Isolated iframe context. Parent controls via postMessage. No XSS surface area.</p> </div> <div class="feature-card" data-astro-cid-j7pv25f6> <div class="feature-icon" data-astro-cid-j7pv25f6> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-j7pv25f6> <circle cx="12" cy="12" r="10" data-astro-cid-j7pv25f6></circle> <line x1="2" y1="12" x2="22" y2="12" data-astro-cid-j7pv25f6></line> <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="feature-title" data-astro-cid-j7pv25f6>Multiple Variants</h3> <p class="feature-description" data-astro-cid-j7pv25f6>Five conversion patterns from trial offers to team upsells. One route, infinite possibilities.</p> </div> <div class="feature-card" data-astro-cid-j7pv25f6> <div class="feature-icon" data-astro-cid-j7pv25f6> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-j7pv25f6> <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" data-astro-cid-j7pv25f6></path> </svg> </div> <h3 class="feature-title" data-astro-cid-j7pv25f6>Event-Based API</h3> <p class="feature-description" data-astro-cid-j7pv25f6>Simple postMessage contracts. Close events, CTA clicks — predictable integration points.</p> </div> <div class="feature-card" data-astro-cid-j7pv25f6> <div class="feature-icon" data-astro-cid-j7pv25f6> <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-astro-cid-j7pv25f6> <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" data-astro-cid-j7pv25f6></path> <circle cx="12" cy="12" r="3" data-astro-cid-j7pv25f6></circle> </svg> </div> <h3 class="feature-title" data-astro-cid-j7pv25f6>Beautiful Design</h3> <p class="feature-description" data-astro-cid-j7pv25f6>Glassmorphism, amber accents, and careful typography. Looks expensive, costs nothing.</p> </div> </div> </section> <!-- Footer --> <footer class="landing-footer" data-astro-cid-j7pv25f6> <p class="footer-text" data-astro-cid-j7pv25f6>
+Built with <a href="https://astro.build" target="_blank" data-astro-cid-j7pv25f6>Astro</a> • 
+          Inspired by <a href="https://radix-ui.com" target="_blank" data-astro-cid-j7pv25f6>Radix UI</a> </p> </footer> </div> <!-- Modal --> <div class="modal-overlay" id="paywallModal" onclick="closeModal(event)" data-astro-cid-j7pv25f6> <div class="modal-container" onclick="event.stopPropagation()" data-astro-cid-j7pv25f6> <button class="modal-close" onclick="closePaywall()" aria-label="Close" data-astro-cid-j7pv25f6>×</button> <iframe id="paywallFrame" class="paywall-frame" title="Paywall Preview" src="" loading="lazy" data-astro-cid-j7pv25f6></iframe> </div> </div> <script>
+      function openPaywall(variant) {
+        const modal = document.getElementById('paywallModal');
+        const frame = document.getElementById('paywallFrame');
+        frame.src = `/paywall?variant=${variant}&dismissable=true&show_survey=true`;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePaywall() {
+        const modal = document.getElementById('paywallModal');
+        const frame = document.getElementById('paywallFrame');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          frame.src = '';
+        }, 300);
+      }
+
+      function closeModal(event) {
+        if (event.target === event.currentTarget) {
+          closePaywall();
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closePaywall();
+        }
+      });
+
+      window.addEventListener('message', function(e) {
+        if (e.origin !== window.location.origin) return;
+        if (e.data === 'closePaywall' || e.data === 'closeDialog') {
+          closePaywall();
+        }
+      });
+    </script> </body> </html>

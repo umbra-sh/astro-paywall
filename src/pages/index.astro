@@ -1,0 +1,782 @@
+---
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>astro-paywall — Embeddable Paywall Popups</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/paywall.css" />
+    <style>
+      :root {
+        --home-bg-0: #0a0805;
+        --home-bg-1: #1c1410;
+        --home-text-strong: #fffaf5;
+        --home-text: #e8ddd3;
+        --home-text-soft: #c4b5a5;
+        --home-line: rgba(251, 191, 36, 0.25);
+        --home-glass: rgba(28, 25, 23, 0.7);
+        --home-glass-strong: rgba(28, 25, 23, 0.85);
+        --home-accent: #f59e0b;
+        --home-accent-strong: #ea580c;
+        --home-accent-glow: rgba(245, 158, 11, 0.4);
+        --home-radius-sm: 12px;
+        --home-radius-md: 16px;
+        --home-radius-lg: 24px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      
+      body {
+        margin: 0;
+        color: var(--home-text-strong);
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background:
+          radial-gradient(1000px 600px at 15% -5%, rgba(245, 158, 11, 0.12), transparent 60%),
+          radial-gradient(900px 500px at 85% -5%, rgba(234, 88, 12, 0.1), transparent 60%),
+          radial-gradient(600px 400px at 50% 120%, rgba(251, 146, 60, 0.08), transparent 50%),
+          linear-gradient(180deg, var(--home-bg-0) 0%, #16120e 50%, var(--home-bg-1) 100%);
+        min-height: 100vh;
+      }
+
+      .landing-shell {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Navigation */
+      .landing-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(251, 191, 36, 0.1);
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--home-text-strong);
+        text-decoration: none;
+      }
+
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--home-accent), var(--home-accent-strong));
+        box-shadow: 0 0 20px var(--home-accent-glow);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .nav-links a {
+        color: var(--home-text);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--home-accent);
+      }
+
+      .nav-cta {
+        padding: 10px 20px;
+        border-radius: var(--home-radius-sm);
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        background: rgba(245, 158, 11, 0.1);
+        color: var(--home-accent);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .nav-cta:hover {
+        background: rgba(245, 158, 11, 0.2);
+        border-color: var(--home-accent);
+      }
+
+      /* Hero */
+      .hero-section {
+        padding: 100px 0 60px;
+        text-align: center;
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(251, 191, 36, 0.35);
+        background: rgba(245, 158, 11, 0.08);
+        color: var(--home-accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 24px;
+      }
+
+      .hero-title {
+        margin: 0;
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, var(--home-text-strong) 0%, var(--home-accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        margin: 24px auto 0;
+        max-width: 640px;
+        font-size: 1.25rem;
+        line-height: 1.7;
+        color: var(--home-text);
+      }
+
+      .hero-actions {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        padding: 14px 28px;
+        border-radius: var(--home-radius-sm);
+        border: none;
+        background: linear-gradient(135deg, var(--home-accent), var(--home-accent-strong));
+        color: #1a0f00;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 28px rgba(245, 158, 11, 0.4);
+      }
+
+      .btn-secondary {
+        padding: 14px 28px;
+        border-radius: var(--home-radius-sm);
+        border: 1px solid rgba(251, 191, 36, 0.4);
+        background: transparent;
+        color: var(--home-text-strong);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(245, 158, 11, 0.1);
+        border-color: var(--home-accent);
+      }
+
+      /* Demo Section */
+      .demo-section {
+        padding: 80px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .section-title {
+        margin: 0 0 12px;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .section-subtitle {
+        margin: 0;
+        color: var(--home-text);
+        font-size: 1.1rem;
+      }
+
+      .variant-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .variant-card {
+        border-radius: var(--home-radius-md);
+        border: 1px solid rgba(251, 191, 36, 0.2);
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(234, 88, 12, 0.02));
+        backdrop-filter: blur(12px);
+        padding: 28px;
+        text-align: center;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .variant-card:hover {
+        border-color: rgba(251, 191, 36, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15);
+      }
+
+      .variant-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        border: 1px solid rgba(251, 191, 36, 0.4);
+        background: rgba(245, 158, 11, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 1.5rem;
+      }
+
+      .variant-title {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .variant-desc {
+        margin: 0 0 16px;
+        color: var(--home-text-soft);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .variant-btn {
+        padding: 10px 20px;
+        border-radius: var(--home-radius-sm);
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        background: transparent;
+        color: var(--home-accent);
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .variant-card:hover .variant-btn {
+        background: rgba(245, 158, 11, 0.15);
+        border-color: var(--home-accent);
+      }
+
+      /* Code Section */
+      .code-section {
+        padding: 80px 0;
+      }
+
+      .code-block {
+        border-radius: var(--home-radius-md);
+        border: 1px solid rgba(251, 191, 36, 0.2);
+        background: rgba(12, 10, 8, 0.8);
+        overflow: hidden;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .code-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(251, 191, 36, 0.1);
+        background: rgba(251, 191, 36, 0.05);
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .dot-red { background: #ef4444; }
+      .dot-yellow { background: #eab308; }
+      .dot-green { background: #22c55e; }
+
+      .code-filename {
+        margin-left: 8px;
+        font-size: 0.85rem;
+        color: var(--home-text-soft);
+      }
+
+      .code-content {
+        padding: 20px 24px;
+        overflow-x: auto;
+      }
+
+      .code-content pre {
+        margin: 0;
+        font-family: "JetBrains Mono", "Fira Code", monospace;
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: var(--home-text);
+      }
+
+      .code-keyword { color: #f59e0b; }
+      .code-string { color: #a3e635; }
+      .code-comment { color: #78716c; }
+      .code-tag { color: #f97316; }
+      .code-attr { color: #60a5fa; }
+
+      /* Features */
+      .features-section {
+        padding: 80px 0;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 48px;
+      }
+
+      .feature-card {
+        border-radius: var(--home-radius-md);
+        border: 1px solid rgba(251, 191, 36, 0.15);
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(234, 88, 12, 0.02));
+        backdrop-filter: blur(12px);
+        padding: 28px;
+        transition: all 0.3s;
+      }
+
+      .feature-card:hover {
+        border-color: rgba(251, 191, 36, 0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(245, 158, 11, 0.1);
+      }
+
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        background: rgba(245, 158, 11, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .feature-title {
+        margin: 0 0 10px;
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+
+      .feature-description {
+        margin: 0;
+        color: var(--home-text-soft);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      /* Modal */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-container {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        max-height: 90vh;
+        overflow: visible;
+        transform: scale(0.95);
+        transition: transform 0.3s;
+        padding: 20px;
+      }
+
+      .modal-overlay.active .modal-container {
+        transform: scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 36px;
+        right: 36px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(251, 191, 36, 0.5);
+        background: rgba(20, 16, 12, 0.9);
+        color: var(--home-text);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      }
+
+      .modal-close:hover {
+        background: rgba(245, 158, 11, 0.2);
+        border-color: var(--home-accent);
+        color: var(--home-text-strong);
+      }
+
+      .paywall-frame {
+        width: 100%;
+        height: 600px;
+        border: none;
+        display: block;
+      }
+
+      /* Footer */
+      .landing-footer {
+        padding: 60px 0 40px;
+        border-top: 1px solid rgba(251, 191, 36, 0.1);
+        margin-top: 80px;
+        text-align: center;
+      }
+
+      .footer-text {
+        color: var(--home-text-soft);
+        font-size: 0.9rem;
+      }
+
+      .footer-text a {
+        color: var(--home-accent);
+        text-decoration: none;
+      }
+
+      .footer-text a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .nav-links {
+          display: none;
+        }
+
+        .variant-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero-section {
+          padding: 60px 0 40px;
+        }
+        
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .paywall-frame {
+          height: 500px;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="landing-shell">
+      <!-- Navigation -->
+      <nav class="landing-nav">
+        <a href="/" class="nav-brand">
+          <span class="brand-dot"></span>
+          astro-paywall
+        </a>
+        <div class="nav-links">
+          <a href="#variants">Variants</a>
+          <a href="#code">Integration</a>
+          <a href="#features">Features</a>
+        </div>
+        <button class="nav-cta" onclick="openPaywall('default')">Try Demo</button>
+      </nav>
+
+      <!-- Hero -->
+      <section class="hero-section">
+        <span class="hero-eyebrow">Iframe-Ready Components</span>
+        <h1 class="hero-title">Beautiful paywall popups.<br>Zero dependencies.</h1>
+        <p class="hero-subtitle">
+          Drop-in paywall dialogs designed for embedding. Server-rendered with Astro, 
+          styled with glassmorphism, and ready for any framework.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="openPaywall('default')">
+            <span>Try Default</span>
+            <span>→</span>
+          </button>
+          <a href="#variants" class="btn-secondary">Explore Variants</a>
+        </div>
+      </section>
+
+      <!-- Demo / Variants Section -->
+      <section class="demo-section" id="variants">
+        <div class="section-header">
+          <h2 class="section-title">Paywall Variants</h2>
+          <p class="section-subtitle">Five battle-tested conversion patterns. One clean route.</p>
+        </div>
+        
+        <div class="variant-grid">
+          <div class="variant-card" onclick="openPaywall('default')">
+            <div class="variant-icon">💎</div>
+            <h3 class="variant-title">Default</h3>
+            <p class="variant-desc">Clean upgrade prompt with survey fallback. Best for general paywalls.</p>
+            <button class="variant-btn">Try it</button>
+          </div>
+          
+          <div class="variant-card" onclick="openPaywall('sitewide')">
+            <div class="variant-icon">⏰</div>
+            <h3 class="variant-title">Campaign</h3>
+            <p class="variant-desc">Urgency-driven with countdown timer and pricing tiers. For flash sales.</p>
+            <button class="variant-btn">Try it</button>
+          </div>
+          
+          <div class="variant-card" onclick="openPaywall('free-week')">
+            <div class="variant-icon">🎁</div>
+            <h3 class="variant-title">Free Trial</h3>
+            <p class="variant-desc">7-day trial offer with feature highlights. Converts trial users.</p>
+            <button class="variant-btn">Try it</button>
+          </div>
+          
+          <div class="variant-card" onclick="openPaywall('free-group')">
+            <div class="variant-icon">👥</div>
+            <h3 class="variant-title">Team Access</h3>
+            <p class="variant-desc">Group plan upsell. Perfect for B2B and team invitations.</p>
+            <button class="variant-btn">Try it</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Code Section -->
+      <section class="code-section" id="code">
+        <div class="section-header">
+          <h2 class="section-title">Drop-in Integration</h2>
+          <p class="section-subtitle">One iframe. Zero dependencies. Works everywhere.</p>
+        </div>
+        
+        <div class="code-block">
+          <div class="code-header">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="code-filename">embed.html</span>
+          </div>
+          <div class="code-content">
+            <code class="code-block-text" is:raw>Default paywall
+&lt;iframe
+  src="/paywall?variant=default&amp;dismissable=true"
+  style="width: 100%; height: 600px; border: none;"
+&gt;&lt;/iframe&gt;
+
+Close handler
+&lt;script&gt;
+window.addEventListener('message', function(e) {
+  if (e.data === 'closePaywall') {
+    // Hide your modal
+  }
+});
+&lt;/script&gt;</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features-section" id="features">
+        <div class="section-header">
+          <h2 class="section-title">Why astro-paywall?</h2>
+          <p class="section-subtitle">Production-ready patterns without the baggage.</p>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="feature-title">Zero Client JS</h3>
+            <p class="feature-description">Server-rendered HTML. No hydration, no bundle bloat. Just fast, reliable popups.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+            </div>
+            <h3 class="feature-title">Framework Agnostic</h3>
+            <p class="feature-description">React, Vue, Svelte, vanilla JS — iframes work everywhere. No wrapper libraries needed.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Secure by Default</h3>
+            <p class="feature-description">Isolated iframe context. Parent controls via postMessage. No XSS surface area.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Multiple Variants</h3>
+            <p class="feature-description">Five conversion patterns from trial offers to team upsells. One route, infinite possibilities.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Event-Based API</h3>
+            <p class="feature-description">Simple postMessage contracts. Close events, CTA clicks — predictable integration points.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+            <h3 class="feature-title">Beautiful Design</h3>
+            <p class="feature-description">Glassmorphism, amber accents, and careful typography. Looks expensive, costs nothing.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="landing-footer">
+        <p class="footer-text">
+          Built with <a href="https://astro.build" target="_blank">Astro</a> • 
+          Inspired by <a href="https://radix-ui.com" target="_blank">Radix UI</a>
+        </p>
+      </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="paywallModal" onclick="closeModal(event)">
+      <div class="modal-container" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closePaywall()" aria-label="Close">×</button>
+        <iframe 
+          id="paywallFrame" 
+          class="paywall-frame"
+          title="Paywall Preview"
+          src=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+
+    <script is:inline>
+      function openPaywall(variant) {
+        const modal = document.getElementById('paywallModal');
+        const frame = document.getElementById('paywallFrame');
+        frame.src = `/paywall?variant=${variant}&show_survey=true`;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePaywall() {
+        const modal = document.getElementById('paywallModal');
+        const frame = document.getElementById('paywallFrame');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          frame.src = '';
+        }, 300);
+      }
+
+      function closeModal(event) {
+        if (event.target === event.currentTarget) {
+          closePaywall();
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closePaywall();
+        }
+      });
+
+      window.addEventListener('message', function(e) {
+        if (e.origin !== window.location.origin) return;
+        if (e.data === 'closePaywall' || e.data === 'closeDialog') {
+          closePaywall();
+        }
+      });
+    </script>
+  </body>
+</html>

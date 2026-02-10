@@ -1,0 +1,51 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"src": "^/_server-islands/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/_image/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/local_health/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/paywall/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/templates/not_ready_to_upgrade_survey/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/templates/paywall/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/templates/paywall_free_group/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/templates/paywall_free_week/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/templates/paywall_sitewide/?$",
+			"dest": "_render"
+		}
+	]
+}
