@@ -1,0 +1,37 @@
+---
+import PaywallLayout from '../../layouts/PaywallLayout.astro';
+import PaywallReact from '../../components/paywall/react/PaywallReact';
+
+// Parse URL parameters
+const url = new URL(Astro.request.url);
+const dismissable = url.searchParams.get('dismissable') === 'true';
+const showSurvey = url.searchParams.get('show_survey') !== 'false';
+const context = url.searchParams.get('context') || 'courses';
+
+const contextData = {
+  courses: { back: true, backUrl: '/', ctaUrl: '/pricing' },
+  projects: { back: false, backUrl: '/', ctaUrl: '/subscribe' },
+  paths: { back: true, backUrl: '/', ctaUrl: '/subscribe' },
+  workspace: { back: true, backUrl: '/workspace', ctaUrl: '/subscribe' },
+};
+
+const resolved = contextData[context as keyof typeof contextData] || contextData.courses;
+
+const features = [
+  'Unlimited access to all courses and projects',
+  'Personalized learning path recommendations',
+  'Progress tracking and skill assessments',
+  'Community access and mentor support',
+];
+---
+
+<PaywallLayout title="Move forward with a better plan - React">
+  <PaywallReact 
+    client:load
+    dismissable={dismissable}
+    showSurvey={showSurvey}
+    context={context}
+    resolved={resolved}
+    features={features}
+  />
+</PaywallLayout>

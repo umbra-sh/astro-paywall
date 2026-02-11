@@ -1,0 +1,60 @@
+---
+interface Props {
+  items: string[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<ul class={`feature-list ${className || ''}`}>
+  {items.map((item) => (
+    <li class="feature-item">
+      <span class="feature-icon"></span>
+      <span class="feature-text">{item}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--pw-text);
+    font-size: 0.95rem;
+  }
+
+  .feature-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    background: var(--pw-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .feature-icon::after {
+    content: '';
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid var(--pw-bg-0);
+    border-bottom: 2px solid var(--pw-bg-0);
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+
+  .feature-text {
+    flex: 1;
+  }
+</style>

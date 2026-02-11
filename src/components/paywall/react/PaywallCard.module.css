@@ -1,0 +1,40 @@
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--pw-surface);
+  border: 1px solid var(--pw-border);
+  border-radius: var(--pw-radius-lg);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(251, 191, 36, 0.1);
+}
+
+.body {
+  padding: 32px;
+  position: relative;
+}
+
+.footer {
+  display: flex;
+  gap: 12px;
+  padding: 20px 32px;
+  border-top: 1px solid var(--pw-border);
+  background: var(--pw-surface-strong);
+}
+
+@media (max-width: 520px) {
+  .card {
+    max-width: 100%;
+  }
+
+  .body {
+    padding: 24px;
+  }
+
+  .footer {
+    padding: 16px 24px;
+    flex-direction: column;
+  }
+}

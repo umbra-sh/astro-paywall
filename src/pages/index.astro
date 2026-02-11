@@ -497,6 +497,319 @@
         text-decoration: underline;
       }
 
+      /* Implementation Section */
+      .implementation-section {
+        padding: 80px 0;
+      }
+
+      .approach-tabs {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+        padding-bottom: 20px;
+      }
+
+      .approach-tab {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        border-radius: var(--home-radius-sm);
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--home-text);
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .approach-tab:hover {
+        background: rgba(245, 158, 11, 0.08);
+        color: var(--home-text-strong);
+      }
+
+      .approach-tab.active {
+        background: rgba(245, 158, 11, 0.15);
+        border-color: rgba(251, 191, 36, 0.4);
+        color: var(--home-accent);
+      }
+
+      .tab-icon {
+        font-size: 1.2rem;
+      }
+
+      .tab-label {
+        font-size: 0.95rem;
+      }
+
+      .approach-content {
+        display: none;
+      }
+
+      .approach-content.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .approach-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .approach-preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .preview-card {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        cursor: pointer;
+        border-radius: var(--home-radius-md);
+        overflow: hidden;
+        border: 1px solid rgba(251, 191, 36, 0.2);
+        background: rgba(12, 10, 8, 0.6);
+        transition: all 0.3s;
+      }
+
+      .preview-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(251, 191, 36, 0.4);
+        box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15);
+      }
+
+      .preview-card:hover .preview-overlay {
+        opacity: 1;
+      }
+
+      .preview-frame {
+        padding: 32px;
+      }
+
+      .mock-card {
+        background: rgba(28, 25, 23, 0.9);
+        border: 1px solid rgba(251, 191, 36, 0.25);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .mock-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        padding: 4px 10px;
+        background: rgba(245, 158, 11, 0.2);
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 6px;
+        color: var(--home-accent);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .mock-badge--react {
+        background: rgba(97, 218, 251, 0.15);
+        border-color: rgba(97, 218, 251, 0.3);
+        color: #61dafb;
+      }
+
+      .mock-header {
+        padding: 24px 24px 16px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--home-text-strong);
+      }
+
+      .mock-body {
+        padding: 0 24px 24px;
+      }
+
+      .mock-line {
+        height: 12px;
+        background: rgba(251, 191, 36, 0.15);
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .mock-line--long {
+        width: 85%;
+      }
+
+      .mock-line--medium {
+        width: 60%;
+      }
+
+      .mock-feature {
+        height: 80px;
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), transparent);
+        border-radius: 8px;
+        margin-top: 16px;
+        border: 1px solid rgba(251, 191, 36, 0.15);
+      }
+
+      .mock-footer {
+        display: flex;
+        gap: 12px;
+        padding: 16px 24px;
+        border-top: 1px solid rgba(251, 191, 36, 0.15);
+        background: rgba(40, 36, 32, 0.5);
+      }
+
+      .mock-btn {
+        height: 36px;
+        border-radius: 6px;
+        flex: 1;
+      }
+
+      .mock-btn--ghost {
+        background: transparent;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+      }
+
+      .mock-btn--primary {
+        background: linear-gradient(135deg, rgba(245, 158, 11, 0.6), rgba(234, 88, 12, 0.4));
+        border: none;
+      }
+
+      .preview-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .preview-cta {
+        padding: 12px 24px;
+        background: var(--home-accent);
+        color: #1a0f00;
+        font-weight: 600;
+        border-radius: var(--home-radius-sm);
+        font-size: 0.95rem;
+      }
+
+      .approach-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .approach-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(120, 113, 108, 0.2);
+        border: 1px solid rgba(120, 113, 108, 0.3);
+        border-radius: 6px;
+        color: var(--home-text-soft);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 16px;
+        width: fit-content;
+      }
+
+      .approach-badge--new {
+        background: rgba(34, 197, 94, 0.15);
+        border-color: rgba(34, 197, 94, 0.3);
+        color: #22c55e;
+      }
+
+      .approach-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 16px;
+        color: var(--home-text-strong);
+      }
+
+      .approach-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--home-text);
+        margin-bottom: 24px;
+      }
+
+      .approach-benefits {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+
+      .benefit {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+        color: var(--home-text);
+      }
+
+      .benefit-check {
+        color: #22c55e;
+        font-weight: 700;
+      }
+
+      .approach-cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .approach-code {
+        margin-top: 0;
+      }
+
+      .approach-summary {
+        margin-top: 60px;
+        padding: 32px;
+        background: rgba(28, 25, 23, 0.5);
+        border: 1px solid rgba(251, 191, 36, 0.15);
+        border-radius: var(--home-radius-md);
+      }
+
+      .approach-summary h4 {
+        margin: 0 0 24px;
+        font-size: 1.1rem;
+        color: var(--home-text-strong);
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .summary-item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .summary-item strong {
+        color: var(--home-accent);
+        font-size: 0.9rem;
+      }
+
+      .summary-item span {
+        color: var(--home-text-soft);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
       /* Responsive */
       @media (max-width: 900px) {
         .features-grid {
@@ -509,6 +822,22 @@
 
         .variant-grid {
           grid-template-columns: 1fr;
+        }
+
+        .approach-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .approach-preview {
+          order: -1;
+        }
+
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .approach-tabs {
+          flex-wrap: wrap;
         }
       }
 
@@ -534,6 +863,10 @@
         .btn-secondary {
           width: 100%;
           justify-content: center;
+        }
+
+        .approach-cta {
+          flex-direction: column;
         }
       }
     </style>
@@ -717,6 +1050,306 @@ window.addEventListener('message', function(e) {
         </div>
       </section>
 
+      <!-- Implementation Approaches Section -->
+      <section class="implementation-section" id="approaches">
+        <div class="section-header">
+          <h2 class="section-title">Three Ways to Build</h2>
+          <p class="section-subtitle">Compare implementation patterns. Choose what fits your stack.</p>
+        </div>
+
+        <div class="approach-tabs">
+          <button class="approach-tab active" onclick="showApproach('string')" data-tab="string">
+            <span class="tab-icon">📄</span>
+            <span class="tab-label">String Templates</span>
+          </button>
+          <button class="approach-tab" onclick="showApproach('astro')" data-tab="astro">
+            <span class="tab-icon">🚀</span>
+            <span class="tab-label">Astro Components</span>
+          </button>
+          <button class="approach-tab" onclick="showApproach('react')" data-tab="react">
+            <span class="tab-icon">⚛️</span>
+            <span class="tab-label">React Components</span>
+          </button>
+        </div>
+
+        <!-- String Templates Approach -->
+        <div class="approach-content active" id="approach-string">
+          <div class="approach-grid">
+            <div class="approach-preview">
+              <div class="preview-card" onclick="openApproachPreview('/paywall?variant=default&show_survey=true')">
+                <div class="preview-frame">
+                  <div class="mock-card">
+                    <div class="mock-header">String Template Paywall</div>
+                    <div class="mock-body">
+                      <div class="mock-line mock-line--long"></div>
+                      <div class="mock-line mock-line--medium"></div>
+                      <div class="mock-feature"></div>
+                    </div>
+                    <div class="mock-footer">
+                      <div class="mock-btn mock-btn--ghost"></div>
+                      <div class="mock-btn mock-btn--primary"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-overlay">
+                  <span class="preview-cta">Click to Preview</span>
+                </div>
+              </div>
+            </div>
+            <div class="approach-info">
+              <div class="approach-badge">Original Implementation</div>
+              <h3 class="approach-title">TypeScript API with Template Literals</h3>
+              <p class="approach-description">
+                The classic approach: API endpoints that return HTML via string concatenation. 
+                Fast, simple, and works anywhere. Best for teams that want minimal abstraction 
+                and maximum control over the markup.
+              </p>
+              <div class="approach-benefits">
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Zero build complexity</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Direct HTML control</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Fastest parse time</span>
+                </div>
+              </div>
+              <div class="approach-cta">
+                <button class="btn-primary" onclick="openApproachPreview('/paywall?variant=default&show_survey=true')">
+                  Try String Template
+                </button>
+                <a href="/paywall?variant=default" target="_blank" class="btn-secondary">
+                  Open Direct Link
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="code-block approach-code">
+            <div class="code-header">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+              <span class="code-filename">src/pages/paywall.ts</span>
+            </div>
+            <div class="code-content">
+              <pre is:raw><span class="code-keyword">export function</span> <span class="code-tag">GET</span>(&#123; request &#125;) {
+  <span class="code-keyword">const</span> body = <span class="code-string">`&lt;div class="paywall"&gt;
+    &lt;h1&gt;Move forward with a better plan&lt;/h1&gt;
+    &lt;p&gt;Choose a subscription...&lt;/p&gt;
+    &lt;a href="/pricing"&gt;See Pro plans&lt;/a&gt;
+  &lt;/div&gt;`</span>;
+  
+  <span class="code-keyword">return new</span> <span class="code-tag">Response</span>(
+    <span class="code-tag">htmlPage</span>(body),
+    &#123; headers: &#123; <span class="code-string">'content-type'</span>: <span class="code-string">'text/html'</span> &#125; &#125;
+  );
+}</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Astro Components Approach -->
+        <div class="approach-content" id="approach-astro">
+          <div class="approach-grid">
+            <div class="approach-preview">
+              <div class="preview-card" onclick="openApproachPreview('/paywall-astro')">
+                <div class="preview-frame">
+                  <div class="mock-card">
+                    <div class="mock-badge">Astro</div>
+                    <div class="mock-header">Astro Component Paywall</div>
+                    <div class="mock-body">
+                      <div class="mock-line mock-line--long"></div>
+                      <div class="mock-line mock-line--medium"></div>
+                      <div class="mock-feature"></div>
+                    </div>
+                    <div class="mock-footer">
+                      <div class="mock-btn mock-btn--ghost"></div>
+                      <div class="mock-btn mock-btn--primary"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-overlay">
+                  <span class="preview-cta">Click to Preview</span>
+                </div>
+              </div>
+            </div>
+            <div class="approach-info">
+              <div class="approach-badge approach-badge--new">New: Component Architecture</div>
+              <h3 class="approach-title">Astro Components with Slots & Scoped Styles</h3>
+              <p class="approach-description">
+                Leverage Astro's component model: composition via slots, scoped CSS per component, 
+                and type-safe props. Zero client JavaScript by default. Best for teams that want 
+                maintainable, composable UI with Astro's island architecture.
+              </p>
+              <div class="approach-benefits">
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Component composition with slots</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Scoped CSS (no global namespace pollution)</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>TypeScript props validation</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Zero client JS by default</span>
+                </div>
+              </div>
+              <div class="approach-cta">
+                <button class="btn-primary" onclick="openApproachPreview('/paywall-astro')">
+                  Try Astro Components
+                </button>
+                <a href="/paywall-astro" target="_blank" class="btn-secondary">
+                  Open Direct Link
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="code-block approach-code">
+            <div class="code-header">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+              <span class="code-filename">src/pages/paywall-astro/index.astro</span>
+            </div>
+            <div class="code-content">
+              <pre is:raw><span class="code-keyword">---</span>
+<span class="code-keyword">import</span> <span class="code-tag">PaywallCard</span> <span class="code-keyword">from</span> <span class="code-string">'../../components/PaywallCard.astro'</span>;
+<span class="code-keyword">import</span> <span class="code-tag">CtaButton</span> <span class="code-keyword">from</span> <span class="code-string">'../../components/CtaButton.astro'</span>;
+<span class="code-keyword">---</span>
+
+<span class="code-tag">&lt;PaywallCard&gt;</span>
+  <span class="code-tag">&lt;h1&gt;</span>Move forward with a better plan<span class="code-tag">&lt;/h1&gt;</span>
+  
+  <span class="code-tag">&lt;Fragment</span> <span class="code-attr">slot</span>=<span class="code-string">"footer"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;CtaButton</span> <span class="code-attr">variant</span>=<span class="code-string">"ghost"</span><span class="code-tag">&gt;</span>Go back<span class="code-tag">&lt;/CtaButton&gt;</span>
+    <span class="code-tag">&lt;CtaButton</span> <span class="code-attr">variant</span>=<span class="code-string">"primary"</span><span class="code-tag">&gt;</span>See Pro plans<span class="code-tag">&lt;/CtaButton&gt;</span>
+  <span class="code-tag">&lt;/Fragment&gt;</span>
+<span class="code-tag">&lt;/PaywallCard&gt;</span>
+
+<span class="code-tag">&lt;style&gt;</span>
+  <span class="code-comment">/* Scoped to this component only */</span>
+  h1 &amp;#123; color: <span class="code-keyword">var</span>(--accent); &amp;#125;
+<span class="code-tag">&lt;/style&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- React Components Approach -->
+        <div class="approach-content" id="approach-react">
+          <div class="approach-grid">
+            <div class="approach-preview">
+              <div class="preview-card" onclick="openApproachPreview('/paywall-react')">
+                <div class="preview-frame">
+                  <div class="mock-card">
+                    <div class="mock-badge mock-badge--react">React</div>
+                    <div class="mock-header">React Component Paywall</div>
+                    <div class="mock-body">
+                      <div class="mock-line mock-line--long"></div>
+                      <div class="mock-line mock-line--medium"></div>
+                      <div class="mock-feature"></div>
+                    </div>
+                    <div class="mock-footer">
+                      <div class="mock-btn mock-btn--ghost"></div>
+                      <div class="mock-btn mock-btn--primary"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="preview-overlay">
+                  <span class="preview-cta">Click to Preview</span>
+                </div>
+              </div>
+            </div>
+            <div class="approach-info">
+              <div class="approach-badge approach-badge--new">New: Framework Components</div>
+              <h3 class="approach-title">React with CSS Modules</h3>
+              <p class="approach-description">
+                Familiar React patterns with CSS Modules for scoped styling. Opt-in hydration 
+                via Astro's client directives. Best for teams already using React who want 
+                component reusability and dynamic interactivity.
+              </p>
+              <div class="approach-benefits">
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Familiar React patterns</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>CSS Modules (scoped styles)</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Dynamic interactivity when needed</span>
+                </div>
+                <div class="benefit">
+                  <span class="benefit-check">✓</span>
+                  <span>Easy migration path from existing React</span>
+                </div>
+              </div>
+              <div class="approach-cta">
+                <button class="btn-primary" onclick="openApproachPreview('/paywall-react')">
+                  Try React Components
+                </button>
+                <a href="/paywall-react" target="_blank" class="btn-secondary">
+                  Open Direct Link
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="code-block approach-code">
+            <div class="code-header">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+              <span class="code-filename">src/pages/paywall-react/index.astro</span>
+            </div>
+            <div class="code-content">
+              <pre is:raw><span class="code-keyword">---</span>
+<span class="code-keyword">import</span> { <span class="code-tag">PaywallCard</span>, <span class="code-tag">CtaButton</span> } 
+  <span class="code-keyword">from</span> <span class="code-string">'../../components/paywall/react'</span>;
+<span class="code-keyword">---</span>
+
+<span class="code-tag">&lt;PaywallCard</span> <span class="code-attr">client:load</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;h1</span> <span class="code-attr">className</span>=&amp;#123;styles.heading&amp;#125;<span class="code-tag">&gt;</span>
+    Move forward with a better plan
+  <span class="code-tag">&lt;/h1&gt;</span>
+  
+  <span class="code-tag">&lt;div</span> <span class="code-attr">slot</span>=<span class="code-string">"footer"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;CtaButton</span> <span class="code-attr">variant</span>=<span class="code-string">"ghost"</span><span class="code-tag">&gt;</span>Go back<span class="code-tag">&lt;/CtaButton&gt;</span>
+    <span class="code-tag">&lt;CtaButton</span> <span class="code-attr">variant</span>=<span class="code-string">"primary"</span><span class="code-tag">&gt;</span>See Pro plans<span class="code-tag">&lt;/CtaButton&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/PaywallCard&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="approach-summary">
+          <h4>Which approach should you choose?</h4>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <strong>Use String Templates when:</strong>
+              <span>You need maximum simplicity, have simple paywalls, or want zero abstraction overhead.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Use Astro Components when:</strong>
+              <span>You want composition, scoped styles, type safety, and zero client JS by default.</span>
+            </div>
+            <div class="summary-item">
+              <strong>Use React Components when:</strong>
+              <span>Your team knows React, you need dynamic interactivity, or you're migrating existing React code.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Footer -->
       <footer class="landing-footer">
         <p class="footer-text">
@@ -745,6 +1378,30 @@ window.addEventListener('message', function(e) {
         const modal = document.getElementById('paywallModal');
         const frame = document.getElementById('paywallFrame');
         frame.src = `/paywall?variant=${variant}&show_survey=true`;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function showApproach(approach) {
+        // Update tabs
+        document.querySelectorAll('.approach-tab').forEach(tab => {
+          tab.classList.remove('active');
+          if (tab.dataset.tab === approach) {
+            tab.classList.add('active');
+          }
+        });
+        
+        // Update content
+        document.querySelectorAll('.approach-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`approach-${approach}`).classList.add('active');
+      }
+
+      function openApproachPreview(url) {
+        const modal = document.getElementById('paywallModal');
+        const frame = document.getElementById('paywallFrame');
+        frame.src = url;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
       }

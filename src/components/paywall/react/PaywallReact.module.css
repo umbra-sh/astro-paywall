@@ -1,0 +1,83 @@
+.content {
+  padding: 32px;
+  position: relative;
+}
+
+.footerButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--pw-border);
+  border-radius: 999px;
+  color: var(--pw-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  color: var(--pw-text-strong);
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--pw-text);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.featureHero {
+  height: 140px;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.12) 0%,
+    rgba(234, 88, 12, 0.05) 50%,
+    transparent 100%
+  );
+  border-radius: var(--pw-radius-md);
+  margin-bottom: 24px;
+  border: 1px solid var(--pw-border);
+}
+
+.feedbackSection {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--pw-border);
+}
+
+.feedbackText {
+  font-size: 0.9rem;
+  color: var(--pw-text-soft);
+}
+
+.feedbackLink {
+  color: var(--pw-accent);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.feedbackLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .content {
+    padding: 24px;
+  }
+
+  .footerButtons {
+    flex-direction: column;
+  }
+}

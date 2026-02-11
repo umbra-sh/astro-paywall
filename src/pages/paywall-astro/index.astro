@@ -1,0 +1,144 @@
+---
+import PaywallLayout from '../../layouts/PaywallLayout.astro';
+import PaywallCard from '../../components/paywall/astro/PaywallCard.astro';
+import CloseButton from '../../components/paywall/astro/CloseButton.astro';
+import CtaButton from '../../components/paywall/astro/CtaButton.astro';
+import FeatureList from '../../components/paywall/astro/FeatureList.astro';
+
+// Parse URL parameters (in production, use Astro.locals or middleware)
+const url = new URL(Astro.request.url);
+const dismissable = url.searchParams.get('dismissable') === 'true';
+const showSurvey = url.searchParams.get('show_survey') !== 'false';
+const context = url.searchParams.get('context') || 'courses';
+
+// Context-aware data
+const contextData = {
+  courses: { back: true, backUrl: '/', ctaUrl: '/pricing' },
+  projects: { back: false, backUrl: '/', ctaUrl: '/subscribe' },
+  paths: { back: true, backUrl: '/', ctaUrl: '/subscribe' },
+  workspace: { back: true, backUrl: '/workspace', ctaUrl: '/subscribe' },
+};
+
+const resolved = contextData[context as keyof typeof contextData] || contextData.courses;
+
+const features = [
+  'Unlimited access to all courses and projects',
+  'Personalized learning path recommendations',
+  'Progress tracking and skill assessments',
+  'Community access and mentor support',
+];
+---
+
+<PaywallLayout title="Move forward with a better plan">
+  <PaywallCard>
+    {dismissable && <CloseButton />}
+    
+    <span class="eyebrow">Pro Plan</span>
+    <h1 class="heading">Move forward with a better plan</h1>
+    
+    <p class="description">
+      Choose a subscription that matches your pace and unlock guided projects, 
+      assessments, and progress insights.
+    </p>
+
+    <div class="feature-hero" role="img" aria-label="Product dashboard preview"></div>
+
+    <FeatureList items={features} />
+
+    {showSurvey && (
+      <div class="feedback-section">
+        <p class="feedback-text">
+          Need more time before you choose?
+          <a href={`/paywall-astro/survey?context=${context}`} class="feedback-link">
+            Tell us why
+          </a>
+        </p>
+      </div>
+    )}
+
+    <Fragment slot="footer">
+      {resolved.back && (
+        <CtaButton 
+          variant="ghost" 
+          href={resolved.backUrl}
+          data-trackid="paywall-go-back"
+        >
+          Go back
+        </CtaButton>
+      )}
+      <CtaButton 
+        variant="primary" 
+        href={resolved.ctaUrl}
+        data-trackid="paywall-see-plans"
+      >
+        See Pro plans
+      </CtaButton>
+    </Fragment>
+  </PaywallCard>
+</PaywallLayout>
+
+<style>
+  .eyebrow {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid var(--pw-border);
+    border-radius: 999px;
+    color: var(--pw-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--pw-text-strong);
+  }
+
+  .description {
+    font-size: 1rem;
+    color: var(--pw-text);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .feature-hero {
+    height: 140px;
+    background: linear-gradient(
+      135deg, 
+      rgba(245, 158, 11, 0.12) 0%, 
+      rgba(234, 88, 12, 0.05) 50%,
+      transparent 100%
+    );
+    border-radius: var(--pw-radius-md);
+    margin-bottom: 24px;
+    border: 1px solid var(--pw-border);
+  }
+
+  .feedback-section {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--pw-border);
+  }
+
+  .feedback-text {
+    font-size: 0.9rem;
+    color: var(--pw-text-soft);
+  }
+
+  .feedback-link {
+    color: var(--pw-accent);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  .feedback-link:hover {
+    text-decoration: underline;
+  }
+</style>

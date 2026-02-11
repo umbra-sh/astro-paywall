@@ -1,0 +1,85 @@
+---
+interface Props {
+  variant?: 'primary' | 'ghost';
+  href?: string;
+  class?: string;
+  'data-trackid'?: string;
+}
+
+const { variant = 'primary', href, class: className, 'data-trackid': trackId } = Astro.props;
+
+const baseClass = `cta-button cta-button--${variant}`;
+const combinedClass = `${baseClass} ${className || ''}`.trim();
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={combinedClass}
+      target="_parent"
+      data-trackid={trackId}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type="button"
+      class={combinedClass}
+      data-trackid={trackId}
+    >
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--pw-radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .cta-button--primary {
+    background: linear-gradient(135deg, var(--pw-accent), var(--pw-accent-strong));
+    color: #1a0f00;
+    border: none;
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+  }
+
+  .cta-button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+  }
+
+  .cta-button--ghost {
+    background: transparent;
+    color: var(--pw-text);
+    border: 1px solid var(--pw-border-strong);
+  }
+
+  .cta-button--ghost:hover {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--pw-accent);
+    color: var(--pw-text-strong);
+  }
+
+  .cta-button:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 520px) {
+    .cta-button {
+      width: 100%;
+    }
+  }
+</style>

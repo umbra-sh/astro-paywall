@@ -1,0 +1,49 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<button
+  type="button"
+  class={`close-button ${className || ''}`}
+  onclick="window.parent.postMessage('closePaywall', '*')"
+  aria-label="Close dialog"
+>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="18" y1="6" x2="6" y2="18"></line>
+    <line x1="6" y1="6" x2="18" y2="18"></line>
+  </svg>
+</button>
+
+<style>
+  .close-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--pw-border-strong);
+    background: var(--pw-surface-strong);
+    color: var(--pw-text);
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+
+  .close-button:hover {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: var(--pw-accent);
+    color: var(--pw-text-strong);
+  }
+
+  .close-button:active {
+    transform: scale(0.95);
+  }
+</style>
