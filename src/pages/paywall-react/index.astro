@@ -26,12 +26,24 @@ const features = [
 ---
 
 <PaywallLayout title="Move forward with a better plan - React">
-  <PaywallReact 
-    client:load
-    dismissable={dismissable}
-    showSurvey={showSurvey}
-    context={context}
-    resolved={resolved}
-    features={features}
-  />
+  <div class="paywall-container">
+    <PaywallReact 
+      client:load
+      dismissable={dismissable}
+      showSurvey={showSurvey}
+      context={context}
+      resolved={resolved}
+      features={features}
+    />
+  </div>
 </PaywallLayout>
+
+<style>
+  .paywall-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+</style>

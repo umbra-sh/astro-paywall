@@ -30,7 +30,8 @@ const features = [
 ---
 
 <PaywallLayout title="Move forward with a better plan">
-  <PaywallCard>
+  <div class="paywall-container">
+    <PaywallCard>
     {dismissable && <CloseButton />}
     
     <span class="eyebrow">Pro Plan</span>
@@ -75,9 +76,17 @@ const features = [
       </CtaButton>
     </Fragment>
   </PaywallCard>
+  </div>
 </PaywallLayout>
 
 <style>
+  .paywall-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
   .eyebrow {
     display: inline-block;
     padding: 4px 12px;
